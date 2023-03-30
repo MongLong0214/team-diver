@@ -1,6 +1,7 @@
 ## 시작하기
 
-Git 저장소를 Pull 한 다음...
+Git 저장소를 Pull 한 다음 필요한 패키지를 설치합니다. 
+실행하려면
 
 ```bash
 npm run dev
