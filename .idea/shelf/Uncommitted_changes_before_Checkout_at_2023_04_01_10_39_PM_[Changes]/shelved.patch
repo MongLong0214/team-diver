@@ -1,0 +1,142 @@
+Index: components/Layout.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import Header from \"./header/Header\";\nimport Form from \"./form/Form\";\nimport SidebarContainter from \"@/components/sidebar/SidebarContainter\";\n\n\nconst Layout = (): JSX.Element => {\n\n  return (\n    <div className='flex flex-row'>\n        <div className='w-1/6'>\n            <SidebarContainter />\n        </div>\n            <Header />\n        <Form />\n    </div>\n  );\n};\n\nexport default Layout;\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/components/Layout.tsx b/components/Layout.tsx
+--- a/components/Layout.tsx	
++++ b/components/Layout.tsx	
+@@ -1,6 +1,7 @@
+ import Header from "./header/Header";
+ import Form from "./form/Form";
+ import SidebarContainter from "@/components/sidebar/SidebarContainter";
++import SubSidebarContainer from "@/components/sidebar/SubSidebarContainer";
+ 
+ 
+ const Layout = (): JSX.Element => {
+@@ -9,6 +10,7 @@
+     <div className='flex flex-row'>
+         <div className='w-1/6'>
+             <SidebarContainter />
++            <SubSidebarContainer />
+         </div>
+             <Header />
+         <Form />
+Index: components/sidebar/SubSidebarContainer.tsx
+===================================================================
+diff --git a/components/sidebar/SubSidebarContainer.tsx b/components/sidebar/SubSidebarContainer.tsx
+new file mode 100644
+--- /dev/null	
++++ b/components/sidebar/SubSidebarContainer.tsx	
+@@ -0,0 +1,22 @@
++import React, { useState } from "react";
++import SubSidebarComponent, { ISubSidebarComponent } from "./SubSidebarComponent";
++
++const SubSidebarContainer = (): JSX.Element => {
++    const [selectedItem, setSelectedItem] = useState<string | null>(null);
++
++    // Add a function to update the selectedItem state when needed
++    const handleSelectItem = (item: string) => {
++        setSelectedItem(item);
++    };
++
++    // Pass the selectedItem to the SubSidebarComponent
++    return (
++        <>
++            {selectedItem && (
++                <SubSidebarComponent selectedItem={selectedItem} />
++            )}
++        </>
++    );
++};
++
++export default SubSidebarContainer;
+Index: components/sidebar/SubSidebarComponent.tsx
+===================================================================
+diff --git a/components/sidebar/SubSidebarComponent.tsx b/components/sidebar/SubSidebarComponent.tsx
+new file mode 100644
+--- /dev/null	
++++ b/components/sidebar/SubSidebarComponent.tsx	
+@@ -0,0 +1,20 @@
++import React, { useState } from "react";
++import {faCircleArrowRight} from "@fortawesome/free-solid-svg-icons";
++import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
++
++
++export interface ISubSidebarComponent {
++    selectedItem: string;
++}
++
++const SubSidebarComponent = ({selectedItem}: ISubSidebarComponent): JSX.Element => {
++    return (
++        <aside className="fixed top-0 right-0 z-40 w-64 h-screen bg-gray-50 dark:bg-gray-800">
++            <div className="h-full px-3 py-4 overflow-y-auto">
++                <h2 className="text-xl font-bold mb-4">{selectedItem}</h2>
++            </div>
++        </aside>
++    );
++};
++
++export default SubSidebarComponent;
+\ No newline at end of file
+Index: components/sidebar/SidebarContainter.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React, { useState } from \"react\";\nimport SidebarComponent from \"./SidebarComponent\";\n\nconst SidebarContainter = (): JSX.Element => {\n\n    return <SidebarComponent />\n}\n\nexport default SidebarContainter
+===================================================================
+diff --git a/components/sidebar/SidebarContainter.tsx b/components/sidebar/SidebarContainter.tsx
+--- a/components/sidebar/SidebarContainter.tsx	
++++ b/components/sidebar/SidebarContainter.tsx	
+@@ -1,9 +1,13 @@
+-import React, { useState } from "react";
++import React from "react";
+ import SidebarComponent from "./SidebarComponent";
+ 
+-const SidebarContainter = (): JSX.Element => {
++export interface ISidebarContainer {
++    handleSelectItem: (item: string) => void;
++}
+ 
+-    return <SidebarComponent />
+-}
++const SidebarContainer = ({ handleSelectItem }: ISidebarContainer): JSX.Element => {
++
++    return <SidebarComponent handleSelectItem={handleSelectItem} />;
++};
+ 
+-export default SidebarContainter
+\ No newline at end of file
++export default SidebarContainer;
+Index: components/sidebar/SidebarComponent.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React, { useState } from \"react\";\nimport {faCircleArrowRight} from \"@fortawesome/free-solid-svg-icons\";\nimport {FontAwesomeIcon} from \"@fortawesome/react-fontawesome\";\n\nconst SidebarComponent = (): JSX.Element => {\n    return (\n        <>\n            <aside id=\"default-sidebar\"\n                   className=\"fixed top-0 left-0 z-40 w-64 h-screen -translate-x-full translate-x-0\"\n                   aria-label=\"Sidebar\">\n                <div className=\"h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800\">\n                    <ul className=\"space-y-2 font-medium\">\n                        <li>\n                            <a href=\"#\"\n                               className=\"flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700\">\n                                <FontAwesomeIcon icon={faCircleArrowRight}\n                                                 className=\"ml-1 flex self-center\"\n                                />\n                                <span className=\"ml-3\">상의</span>\n                            </a>\n                        </li>\n                        <li>\n                            <a href=\"#\"\n                               className=\"flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700\">\n                                <FontAwesomeIcon icon={faCircleArrowRight}\n                                                 className=\"ml-1 flex self-center\"\n                                />\n                                <span className=\"flex-1 ml-3 whitespace-nowrap\">아우터</span>\n                            </a>\n                        </li>\n                        <li>\n                            <a href=\"#\"\n                               className=\"flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700\">\n                                <FontAwesomeIcon icon={faCircleArrowRight}\n                                                 className=\"ml-1 flex self-center\"\n                                />\n                                <span className=\"flex-1 ml-3 whitespace-nowrap\">하의</span>\n                            </a>\n                        </li>\n                        <li>\n                            <a href=\"#\"\n                               className=\"flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700\">\n                                <FontAwesomeIcon icon={faCircleArrowRight}\n                                                 className=\"ml-1 flex self-center\"\n                                />\n                                <span className=\"flex-1 ml-3 whitespace-nowrap\">원피스</span>\n                            </a>\n                        </li>\n                        <li>\n                            <a href=\"#\"\n                               className=\"flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700\">\n                                <FontAwesomeIcon icon={faCircleArrowRight}\n                                                 className=\"ml-1 flex self-center\"\n                                />\n                                <span className=\"flex-1 ml-3 whitespace-nowrap\">스커트</span>\n                            </a>\n                        </li>\n                    </ul>\n                </div>\n            </aside>\n        </>\n    )\n}\nexport default SidebarComponent
+===================================================================
+diff --git a/components/sidebar/SidebarComponent.tsx b/components/sidebar/SidebarComponent.tsx
+--- a/components/sidebar/SidebarComponent.tsx	
++++ b/components/sidebar/SidebarComponent.tsx	
+@@ -2,7 +2,11 @@
+ import {faCircleArrowRight} from "@fortawesome/free-solid-svg-icons";
+ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+ 
+-const SidebarComponent = (): JSX.Element => {
++export interface ISidebarComponent {
++    handleSelectItem: (item: string) => void;
++}
++
++const SidebarComponent = ({ handleSelectItem }: ISidebarComponent): JSX.Element => {
+     return (
+         <>
+             <aside id="default-sidebar"
+@@ -12,7 +16,8 @@
+                     <ul className="space-y-2 font-medium">
+                         <li>
+                             <a href="#"
+-                               className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
++                               className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
++                               onClick={() => handleSelectItem("상의")}>
+                                 <FontAwesomeIcon icon={faCircleArrowRight}
+                                                  className="ml-1 flex self-center"
+                                 />
