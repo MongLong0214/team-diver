@@ -16,7 +16,6 @@ const Layout = (): JSX.Element => {
             <Form />
             <SelectedItemsBox />
         </section>
-
     </div>
   );
 };
