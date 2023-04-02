@@ -1,17 +1,22 @@
 import Header from "./header/Header";
 import Form from "./form/Form";
-import SidebarContainter from "@/components/sidebar/SidebarContainter";
+import SidebarContainter from "@/components/sidebar/SidebarContainer";
+import SelectedItemsBox from "@/components/selectedItemsBox/SelectedItemsBox";
 
 
 const Layout = (): JSX.Element => {
 
   return (
     <div className='flex flex-row'>
-        <div className='w-1/6'>
+        <section className='min-w-[550px]'>
             <SidebarContainter />
-        </div>
+        </section>
+        <section>
             <Header />
-        <Form />
+            <Form />
+            <SelectedItemsBox />
+        </section>
+
     </div>
   );
 };
