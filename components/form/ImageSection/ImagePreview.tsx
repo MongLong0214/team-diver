@@ -5,8 +5,8 @@ type props = {
 
 const ImagePreview = ({ imageSrc, imgRef }: props): JSX.Element => {
   return (
-      <div className="w-2/3 mx-auto">
-        <img src={imageSrc} ref={imgRef} className="object-contain w-full h-auto max-h-80" />
+      <div className="mx-auto min-w-[600px] min-h-[600px]">
+        <img src={imageSrc} ref={imgRef} className="object-contain w-full h-full max-h-[600px] max-w-[650px]" />
       </div>
   );
 };
