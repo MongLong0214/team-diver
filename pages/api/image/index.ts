@@ -1,6 +1,14 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 
+export const config = {
+  api: {
+      bodyParser: {
+          sizeLimit: '3mb' // Set desired value here
+      }
+  }
+}
+
 type Data = {
   result: string;
   message: string;
