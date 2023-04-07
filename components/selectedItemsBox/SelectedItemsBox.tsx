@@ -10,7 +10,6 @@ const SelectedItemsBox = (): JSX.Element => {
     const items: string[] = useRecoilValue(selectedItemsAtom);
     const setSelectedItems = useSetRecoilState(selectedItemsAtom);
 
-
     const removeItem = (index: number) => {
         setSelectedItems((prevItems) => prevItems.filter((_, i) => i !== index));
     };

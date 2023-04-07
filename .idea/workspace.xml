@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bb10f82d-1251-4847-91ef-ac8f9641f92b" name="Changes" comment="사이드바 작업 merge">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/selectedItemsBox/SelectedItemsBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/selectedItemsBox/SelectedItemsBox.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +25,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="develop-wonil" />
+        <entry key="$PROJECT_DIR$" value="develop" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -61,6 +62,7 @@
       <updated>1680346674415</updated>
       <workItem from="1680346677265" duration="8384000" />
       <workItem from="1680441951473" duration="351000" />
+      <workItem from="1680871834866" duration="181000" />
     </task>
     <task id="LOCAL-00001" summary="사이드바 작업 merge">
       <created>1680441154300</created>
