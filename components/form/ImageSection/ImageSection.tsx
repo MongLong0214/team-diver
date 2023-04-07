@@ -3,6 +3,7 @@ import ImagePreview from "./ImagePreview";
 import React, { useState } from "react";
 import Resizer from "react-image-file-resizer";
 import Canvas from "./Canvas";
+import { maxHeight, maxWidth} from "../../globalVal";
 
 import { useRecoilValue } from "recoil";
 import { selectedItemsAtom } from "@/atom/selectedItemsAtom";
@@ -108,8 +109,8 @@ const ImageSection = ({ imgRef }: props): JSX.Element => {
       const file: File = e.target.files[0];
       Resizer.imageFileResizer(
         file,
-        650,
-        600,
+        maxWidth,
+        maxHeight,
         "PNG",
         100,
         0,

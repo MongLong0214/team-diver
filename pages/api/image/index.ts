@@ -30,10 +30,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
      const widthValue = Math.floor(parseInt(width)/8)*8
      const heightValue = Math.floor(parseInt(height)/8)*8
-    //  console.log(init_image, mask)
 
     const bodyData = {
       key: process.env.SD_KEY,
+      // todo : prompt 재설정
       prompt : "baseball player",
       model_id: "realistic-vision-v13",
       negative_prompt: null,
@@ -68,3 +68,37 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   }
   return;
 }
+
+
+// 성공한 response 예시
+
+// {
+//   "status": "success",
+//   "generationTime": 4.918609142303467,
+//   "id": 10303550,
+//   "output": [
+//       "https://pub-8b49af329fae499aa563997f5d4068a4.r2.dev/generations/0d1e7182-431c-4f68-9ba0-1fa3361f2d4b-0.png"
+//   ],
+//   "meta": {
+//       "H": 512,
+//       "W": 512,
+//       "file_prefix": "0d1e7182-431c-4f68-9ba0-1fa3361f2d4b",
+//       "full_url": "no",
+//       "guidance_scale": 7.5,
+//       "init_image": "https://awsbucket39.s3.ap-northeast-2.amazonaws.com/4349917.png",
+//       "mask_image": "https://awsbucket39.s3.ap-northeast-2.amazonaws.com/4349917_m.png",
+//       "model_id": "realistic-vision-v13",
+//       "n_samples": 1,
+//       "negative_prompt": " ((out of frame)), ((extra fingers)), mutated hands, ((poorly drawn hands)), ((poorly drawn face)), (((mutation))), (((deformed))), (((tiling))), ((naked)), ((tile)), ((fleshpile)), ((ugly)), (((abstract))), blurry, ((bad anatomy)), ((bad proportions)), ((extra limbs)), cloned face, glitchy, ((extra breasts)), ((double torso)), ((extra arms)), ((extra hands)), ((mangled fingers)), ((missing breasts)), (missing lips), ((ugly face)), ((fat)), ((extra legs))",
+//       "outdir": "out",
+//       "prompt": " soccer player DSLR photography, sharp focus, Unreal Engine 5, Octane Render, Redshift, ((cinematic lighting)), f/1.4, ISO 200, 1/160s, 8K, RAW, unedited, symmetrical balance, in-frame",
+//       "safetychecker": "yes",
+//       "scheduler": "DDPMScheduler",
+//       "seed": 3741974719,
+//       "steps": 50,
+//       "upscale": "no"
+//   }
+// }
+
+//실패한 예시
+// {status: 'error', message: '# 그때그때 다름'}
