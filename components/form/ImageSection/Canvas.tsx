@@ -21,10 +21,12 @@ const Canvas = ({ width, height, setCanvasData, isVisible }: CanvasProps): JSX.E
       canvas.width = width;
       canvas.height = height;
       const context = canvas.getContext("2d");
-
       if (context) {
-        context.strokeStyle = "black";
-        context.lineWidth = 30;
+        context.fillStyle = "black";
+        context.fillRect(0,0, canvas.width, canvas.height);
+
+        context.strokeStyle = "white";
+        context.lineWidth = 20;
         contextRef.current = context;
 
         setCtx(context);
@@ -38,7 +40,9 @@ const Canvas = ({ width, height, setCanvasData, isVisible }: CanvasProps): JSX.E
 
   const finishDrawing = () => {
     setIsDrawing(false);
-    setCanvasData(canvasRef.current?.toDataURL("image/jpeg")|| "");
+    // png 로 하는 이유는, 안 그린 영역을 자동으로 흰색으로 칠하기 때문입니다. 
+    // 참고로 jpeg 는 검정색이므로 항상 검은 이미지만 나오게됩니다.
+    setCanvasData(canvasRef.current?.toDataURL("image/png")|| "");
   };
 
   const drawing = ({ nativeEvent }: any) => {
@@ -49,8 +53,7 @@ const Canvas = ({ width, height, setCanvasData, isVisible }: CanvasProps): JSX.E
         ctx.moveTo(offsetX, offsetY);
       } else {
         ctx.lineTo(offsetX, offsetY);
-        ctx.stroke();
-        
+        ctx.stroke(); 
       }
     }
   };

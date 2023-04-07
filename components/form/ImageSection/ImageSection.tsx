@@ -19,7 +19,7 @@ type imgSize = {
 const ImageSection = ({ imgRef }: props): JSX.Element => {
   const [imageSrc, setImageSrc] = useState<string>("");
   const [imgSize, setImgSize] = useState<imgSize>({ width: 0, height: 0 });
-  
+
   const [canvasData, setCanvasData] = useState<string>("");
   const [mask, setMask] = useState<boolean>(true);
   const promptVal: string[] = useRecoilValue(selectedItemsAtom);
@@ -33,28 +33,70 @@ const ImageSection = ({ imgRef }: props): JSX.Element => {
 
   const toggleMask = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setMask(prev => !prev);
-  }
+    setMask((prev) => !prev);
+  };
+
+  type uploadImageUrl = { result: boolean; initUrl?: string; maskUrl?: string };
+  const uploadImage = async (): uploadImageUrl => {
+    if (imgRef.current !== null) {
+      const response = await fetch("/api/image/upload", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          init_image: imgRef.current.src,
+          mask_image: canvasData,
+        }),
+      });
+      if (!response.ok) {
+        console.error("Error on upload");
+        return { result: false };
+      }
+
+      const { initLocation, maskLocation } = await response.json();
+      return { 
+        result: true, 
+        initUrl: initLocation, 
+        maskUrl: maskLocation,
+      };
+    }
+  };
+
+  const generateImage = async (initUrl: string, maskUrl: string) => {
+    const response = await fetch("/api/image", {
+      method: "POST",        
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        init_image: initUrl,
+        mask: maskUrl,
+        prompt: promptVal.join(", "),
+        width: imgSize.width,
+        height: imgSize.height,
+      }),
+    });
+    if (!response.ok) {
+      console.error("Error on API");
+      return;
+    }
+    const data = await response.json();
+    console.log(data);
+    // setImageSrc(data.image);
+  };
 
   const onSubmitHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     if (imgRef.current !== null) {
-      console.log(canvasData);
-      // const response = await fetch("/api/image", {
-      //   method: "POST",
-      //   body: JSON.stringify({
-      //     init_image: imgRef.current.src,
-      //     mask: canvasData,
-      //     prompt: promptVal.join(", "),
-      //   }),
-      // });
-      // if (!response.ok) {
-      //   console.error("Error on fetch");
-      //   return;
-      // }
-      // const data = await response.json();
-      // setImageSrc(data.image);
+      const { result, initUrl, maskUrl } = await uploadImage();
+      console.log(initUrl, maskUrl);
+      if (result === false || !initUrl || !maskUrl) {
+        return;
+      } else {      
+        generateImage(initUrl, maskUrl);
+      }
     }
   };
 
@@ -81,25 +123,11 @@ const ImageSection = ({ imgRef }: props): JSX.Element => {
     }
   };
 
-  // const convertBase64 = (file: File) => {
-  //   return new Promise((res, rej) => {
-  //     const fileReader = new FileReader();
-  //     fileReader.readAsDataURL(file);
-
-  //     fileReader.onload = () => {
-  //       res(fileReader.result);
-  //     };
-  //     fileReader.onerror = (error) => {
-  //       rej(error);
-  //     };
-  //   });
-  // };
-
   return (
     <div className="">
       {imageSrc.length > 0 || (
         <>
-          <ImageInput onChangeHandler={onChangeHandler} />      
+          <ImageInput onChangeHandler={onChangeHandler} />
           <div>
             <button type="button" className="py-2 px-4 text-white bg-gray-300 rounded focus:outline-none" disabled>
               Reset
