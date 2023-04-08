@@ -9,7 +9,7 @@ export interface ISidebarComponent {
 
 
 const SidebarComponent = ({ setSelectedItem }: ISidebarComponent): JSX.Element => {
-    const [activeItem, setActiveItem] = useState<MenuItemKey | null>(null);
+    const [activeItem, setActiveItem] = useState<MenuItemKey>("상의");
 
     const onItemClick = (item: MenuItemKey) => {
         setSelectedItem(item);

@@ -4,7 +4,7 @@ import SubSidebarContainer from "./SubSidebarContainer";
 import { MenuItemKey } from "./SubSidebarContainer";
 
 const SidebarContainer = (): JSX.Element => {
-    const [selectedItem, setSelectedItem] = useState<MenuItemKey | null>(null);
+    const [selectedItem, setSelectedItem] = useState<MenuItemKey>("상의");
 
     return (
         <>

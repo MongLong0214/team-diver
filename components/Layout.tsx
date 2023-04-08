@@ -6,7 +6,7 @@ import {maxWidth} from "./globalVal";
 const Layout = (): JSX.Element => {
     return (
         <div className="flex flex-row min-h-screen">
-            <section className="min-w-[550px]">
+            <section className="min-w-[750px]">
                 <SidebarContainter/>
             </section>
             <section className="min-w-full flex">
