@@ -1,5 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
+import { useRecoilValue } from "recoil";
+import { selectedItemsAtom } from "@/atom/selectedItemsAtom";
 
 export const config = {
   api: {
@@ -17,8 +19,12 @@ type Data = {
   image?: string;
 };
 
+
+
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-  if (req.method === "POST") {
+
+    if (req.method === "POST") {
 
     const {
       init_image,
@@ -31,10 +37,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
      const widthValue = Math.floor(parseInt(width)/8)*8
      const heightValue = Math.floor(parseInt(height)/8)*8
 
+
     const bodyData = {
       key: process.env.SD_KEY,
       // todo : prompt 재설정
-      prompt : "baseball player",
+      prompt : prompt,
       model_id: "realistic-vision-v13",
       negative_prompt: null,
       init_image: init_image,
@@ -61,7 +68,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         }
     )
     const responseData = await fetchResponse.json();
-    
+
     res.status(200).json( responseData );
   } else {
     res.status(403).json({ result: "403 error", requestData: req.body, message: "Not allowed method" });

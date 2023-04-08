@@ -1,12 +1,16 @@
 import ImageInput from "./ImageInput";
 import ImagePreview from "./ImagePreview";
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import Resizer from "react-image-file-resizer";
 import Canvas from "./Canvas";
 import { maxHeight, maxWidth} from "../../globalVal";
+import LoadingOverlay from "@/components/common/LoadingOverlay";
 
-import { useRecoilValue } from "recoil";
+import {useRecoilState, useRecoilValue} from "recoil";
 import { selectedItemsAtom } from "@/atom/selectedItemsAtom";
+
+import {convertPrompt} from "@/components/common/utils";
+import Swal from "sweetalert2";
 
 type props = {
   imgRef: React.RefObject<HTMLImageElement>;
@@ -23,13 +27,20 @@ const ImageSection = ({ imgRef }: props): JSX.Element => {
 
   const [canvasData, setCanvasData] = useState<string>("");
   const [mask, setMask] = useState<boolean>(true);
-  const promptVal: string[] = useRecoilValue(selectedItemsAtom);
+  // const promptVal: string[] = useRecoilValue(selectedItemsAtom);
+  const [promptVal, setPromptVal] = useRecoilState(selectedItemsAtom);
+  const [loadingOverlay, setLoadingOverlay] = useState<boolean>(false);
+  const [isFinished, setIsFinished] = useState<boolean>(false);
+
+
 
   const resetImage = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setImageSrc("");
     setCanvasData("");
+    setIsFinished(false)
     setMask(true);
+    setPromptVal([]);
   };
 
   const toggleMask = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -38,54 +49,96 @@ const ImageSection = ({ imgRef }: props): JSX.Element => {
   };
 
   type uploadImageUrl = { result: boolean; initUrl?: string; maskUrl?: string };
-  const uploadImage = async (): uploadImageUrl => {
-    if (imgRef.current !== null) {
-      const response = await fetch("/api/image/upload", {
+
+  const englishPrompts = convertPrompt(promptVal);
+
+  const uploadImage = async (): Promise<uploadImageUrl> => {
+    setLoadingOverlay(true)
+
+    try {
+      if (imgRef.current !== null) {
+        const response = await fetch("/api/image/upload", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            init_image: imgRef.current.src,
+            mask_image: canvasData,
+          }),
+        });
+
+        if (!response.ok) {
+          console.error("Error on upload");
+          return { result: false };
+        }
+
+        const { initLocation, maskLocation } = await response.json();
+        return {
+          result: true,
+          initUrl: initLocation,
+          maskUrl: maskLocation,
+        };
+      }
+    } catch (error) {
+      console.error("Error in uploadImage:", error);
+    } finally {
+      console.log("uploadImage finished");
+    }
+  };
+
+
+
+  const generateImage = async (initUrl: string, maskUrl: string) => {
+
+    try {
+      console.log("data upload...");
+      const response = await fetch("/api/image", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          init_image: imgRef.current.src,
-          mask_image: canvasData,
+          init_image: initUrl,
+          mask: maskUrl,
+          prompt: englishPrompts.join(", ") + ", sharp focus, Unreal Engine 5, Octane Render, Redshift, ((cinematic lighting)), f/1.4, ISO 200, 1/160s, 8K, RAW, unedited, symmetrical balance, in-frame",
+          width: imgSize.width,
+          height: imgSize.height,
         }),
       });
+
       if (!response.ok) {
-        console.error("Error on upload");
-        return { result: false };
+        console.error("Error on API");
+        return;
       }
 
-      const { initLocation, maskLocation } = await response.json();
-      return { 
-        result: true, 
-        initUrl: initLocation, 
-        maskUrl: maskLocation,
-      };
+      const data = await response.json();
+      if(data.output[0] === undefined) {
+        setImageSrc("");
+        setCanvasData("");
+        setIsFinished(false)
+        setMask(true);
+        setPromptVal([]);
+        Swal.fire('이미지를 생성하지 못했습니다. 이미지를 다시 생성해주세요.', '', 'warning').then(() => {
+          console.log("fail")
+        },
+        )
+        return;
+      }
+
+      console.log("data ::", data.output[0]);
+      setImageSrc(data.output[0]);
+      setMask(false);
+      setIsFinished(true);
+
+    } catch (error) {
+      console.error("Error in generateImage:", error);
+    } finally {
+      console.log("generateImage finished");
+      // setLoadingOverlay(false);
     }
   };
 
-  const generateImage = async (initUrl: string, maskUrl: string) => {
-    const response = await fetch("/api/image", {
-      method: "POST",        
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        init_image: initUrl,
-        mask: maskUrl,
-        prompt: promptVal.join(", "),
-        width: imgSize.width,
-        height: imgSize.height,
-      }),
-    });
-    if (!response.ok) {
-      console.error("Error on API");
-      return;
-    }
-    const data = await response.json();
-    console.log(data);
-    // setImageSrc(data.image);
-  };
 
   const onSubmitHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -93,10 +146,10 @@ const ImageSection = ({ imgRef }: props): JSX.Element => {
     if (imgRef.current !== null) {
       const { result, initUrl, maskUrl } = await uploadImage();
       console.log(initUrl, maskUrl);
-      if (result === false || !initUrl || !maskUrl) {
+      if (!result || !initUrl || !maskUrl) {
         return;
       } else {      
-        generateImage(initUrl, maskUrl);
+        await generateImage(initUrl, maskUrl);
       }
     }
   };
@@ -105,8 +158,21 @@ const ImageSection = ({ imgRef }: props): JSX.Element => {
     if (!e.target.files) {
       return;
     }
+
     try {
       const file: File = e.target.files[0];
+      // if image size is smaller than 300 * 300, swal alert
+      if (e.target.files[0].size < 300 * 300) {
+        Swal.fire({
+          title: "이미지 사이즈가 너무 작습니다.",
+          text: "300 * 300 이상의 이미지를 업로드해주세요.",
+          icon: "warning",
+          confirmButtonText: "확인",
+        }).then(()=> {
+          e.target.value = "";
+        }) ;
+        return;
+      }
       Resizer.imageFileResizer(
         file,
         maxWidth,
@@ -124,40 +190,68 @@ const ImageSection = ({ imgRef }: props): JSX.Element => {
     }
   };
 
+
   return (
-    <div className="">
-      {imageSrc.length > 0 || (
+      <div className='max-w-fit'>
+      {loadingOverlay && <LoadingOverlay />}
+      {imageSrc?.length > 0 ? (
         <>
-          <ImageInput onChangeHandler={onChangeHandler} />
-          <div>
-            <button type="button" className="py-2 px-4 text-white bg-gray-300 rounded focus:outline-none" disabled>
-              Reset
-            </button>
-            <button type="button" className="py-2 px-4 text-white bg-gray-300 rounded focus:outline-none" disabled>
-             toggle mask
-            </button>
-            <button type="button" className="py-2 px-4 text-white bg-gray-300 rounded focus:outline-none" disabled>
-              생성하기
-            </button>
-          </div>
-        </>
-      )}
-      {imageSrc.length > 0 && (
-        <>
-          <ImagePreview imageSrc={imageSrc} imgRef={imgRef} setImgSize={setImgSize} />
+          <ImagePreview imageSrc={imageSrc} imgRef={imgRef} setImgSize={setImgSize}  setLoadingOverlay={setLoadingOverlay} />
           <Canvas {...imgSize} setCanvasData={setCanvasData} isVisible={mask} />
-          <div>
-            <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" onClick={resetImage}>
-              Reset
+          <div className='flex justify-center'>
+            <button className="px-4 py-2 text-sm font-medium
+              text-gray-900 bg-gray-400 border border-gray-900 rounded-l-lg
+              hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500
+              focus:bg-gray-900 focus:text-white dark:border-white dark:text-white
+              dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700" onClick={resetImage}>
+              새로 만들기
             </button>
-            <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" onClick={toggleMask}>
-              toggle mask
-            </button>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit" onClick={onSubmitHandler}>
-              생성하기
-            </button>
+            {!isFinished && (
+                <>
+                  <button className="px-4 py-2 text-sm font-medium text-gray-900 bg-gray-400
+               border-t border-b border-gray-900 hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2
+               focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white
+                dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700"
+                          onClick={toggleMask}>
+                    마스킹 편집
+                  </button>
+                  <button className="px-4 py-2 text-sm font-medium text-gray-900 bg-gray-400
+              border border-gray-900 rounded-r-md hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2
+               focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white
+                dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700"
+                          type="submit"
+                          onClick={onSubmitHandler}>
+                    이미지 생성
+                  </button>
+                </>
+            )}
           </div>
         </>
+      ) : (
+          <>
+            <ImageInput onChangeHandler={onChangeHandler} />
+            <div className="inline-flex rounded-md shadow-sm" role="group">
+              <button type="button" className="px-4 py-2 text-sm font-medium
+              text-gray-900 bg-gray-400 border border-gray-900 rounded-l-lg
+              hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500
+              focus:bg-gray-900 focus:text-white dark:border-white dark:text-white
+              dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
+                새로 만들기
+              </button>
+              <button type="button" className="px-4 py-2 text-sm font-medium text-gray-900 bg-gray-400
+               border-t border-b border-gray-900 hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2
+               focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white
+                dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
+                마스킹 편집
+              </button>
+              <button type="button" className="px-4 py-2 text-sm font-medium text-gray-900 bg-gray-400
+              border border-gray-900 rounded-r-md hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2
+               focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white
+                dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
+                이미지 생성
+              </button>
+            </div>
+          </>
       )}
     </div>
   );

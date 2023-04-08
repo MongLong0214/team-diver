@@ -5,8 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bb10f82d-1251-4847-91ef-ac8f9641f92b" name="Changes" comment="사이드바 작업 merge">
+      <change afterPath="$PROJECT_DIR$/StableDiffusion.postman_collection.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/common/LoadingOverlay.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/common/utils.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/blackLeather.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/blacksuit.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/graysuit.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/hip.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/jumpsuit.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/sports.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/stud.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/suit.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/training.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/vintagecoat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/y2k.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/yoga.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/form/ImageSection/ImagePreview.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/form/ImageSection/ImagePreview.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/form/ImageSection/ImageSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/form/ImageSection/ImageSection.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/selectedItemsBox/SelectedItemsBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/selectedItemsBox/SelectedItemsBox.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/sidebar/SidebarComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/sidebar/SidebarComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/sidebar/SubSidebarComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/sidebar/SubSidebarComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/sidebar/SubSidebarContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/sidebar/SubSidebarContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/image/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/image/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/image/upload.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/image/upload.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,9 +39,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript File" />
         <option value="tsconfig.json" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -52,6 +75,15 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/assets" />
+      <recent name="$PROJECT_DIR$/public" />
+      <recent name="$PROJECT_DIR$/assets" />
+      <recent name="$PROJECT_DIR$/components/common" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -62,7 +94,7 @@
       <updated>1680346674415</updated>
       <workItem from="1680346677265" duration="8384000" />
       <workItem from="1680441951473" duration="351000" />
-      <workItem from="1680871834866" duration="181000" />
+      <workItem from="1680871834866" duration="32973000" />
     </task>
     <task id="LOCAL-00001" summary="사이드바 작업 merge">
       <created>1680441154300</created>

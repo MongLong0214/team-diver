@@ -10,6 +10,7 @@ const SelectedItemsBox = (): JSX.Element => {
     const items: string[] = useRecoilValue(selectedItemsAtom);
     const setSelectedItems = useSetRecoilState(selectedItemsAtom);
 
+
     const removeItem = (index: number) => {
         setSelectedItems((prevItems) => prevItems.filter((_, i) => i !== index));
     };
@@ -40,8 +41,8 @@ const SelectedItemsBox = (): JSX.Element => {
 
 
     return (
-        <div className="flex flex flex-wrap p-4 bg-gray-100 rounded-lg mt-4 w-3/4">
-            <div className="text-gray-500 text-sm ml-1 mb-4 w-full">선택된 아이템</div>
+        <div className="flex flex flex-wrap p-4 bg-gray-100 rounded-lg mt-4">
+            <div className="text-gray-500 text-sm ml-1 mb-4 w-full">선택된 의상</div>
             <div>
                 {items.map((item: string, index: number) => (
                     <div key={index} className="relative inline-block m-1">

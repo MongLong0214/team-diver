@@ -2,6 +2,10 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse){
 
+  if(req.method !== "POST") {
+    res.status(400).json({ message: "Bad Request" });
+    return;
+  }
   const AWS = require("aws-sdk");
 
   // DANGER ZONE!!
