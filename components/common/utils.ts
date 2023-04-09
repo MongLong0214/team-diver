@@ -7,7 +7,7 @@ export const convertPrompt = (prompt: string[]): string[] => {
         "반소매 티셔츠": "short sleeves",
         "셔츠": "shirts",
         "블라우스": "blouse",
-        "피케이 티셔츠": "pique",
+        "피케이 티셔츠": "pique shirts",
         "민소매 티셔츠": "sleeveless shirts",
         "블레이저": "blazer",
         "카디건": "cardigan",

@@ -105,7 +105,7 @@ const ImageSection = ({ imgRef }: props): JSX.Element => {
         body: JSON.stringify({
           init_image: initUrl,
           mask: maskUrl,
-          prompt: englishPrompts.join(", ") + ", sharp focus, Unreal Engine 5, Octane Render, Redshift, ((cinematic lighting)), f/1.4, ISO 200, 1/160s, 8K, RAW, unedited, symmetrical balance, in-frame",
+          prompt: englishPrompts.join(", ") + ", simplistic, fashion design, clothing concept, clothing design, photoshoot, illustration, trending on artstation",
           width: imgSize.width,
           height: imgSize.height,
         }),
@@ -137,6 +137,7 @@ const ImageSection = ({ imgRef }: props): JSX.Element => {
 
     } catch (error) {
       console.error("Error in generateImage:", error);
+      setLoadingOverlay(false);
     } finally {
       console.log("generateImage finished");
       // setLoadingOverlay(false);

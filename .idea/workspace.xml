@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb10f82d-1251-4847-91ef-ac8f9641f92b" name="Changes" comment="final merge" />
+    <list default="true" id="2c084a02-06bc-4dd5-8371-1b5c96079f5c" name="Changes" comment="사이드바 작업 merge">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/common/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/common/utils.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/form/ImageSection/ImageSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/form/ImageSection/ImageSection.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,7 +26,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="develop" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -77,7 +81,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680441154300</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="final merge">
+      <created>1681020461742</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1681020461742</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -96,6 +107,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="사이드바 작업 merge" />
-    <option name="LAST_COMMIT_MESSAGE" value="사이드바 작업 merge" />
+    <MESSAGE value="final merge" />
+    <option name="LAST_COMMIT_MESSAGE" value="final merge" />
   </component>
 </project>
