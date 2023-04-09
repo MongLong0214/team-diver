@@ -83,7 +83,6 @@ const ImageSection = ({ imgRef }: props): JSX.Element => {
     } catch (error) {
       console.error("Error in uploadImage:", error);
     } finally {
-      setLoadingOverlay(false);
       console.log("uploadImage finished");
     }
 
