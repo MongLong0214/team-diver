@@ -12,7 +12,7 @@ interface ISubSidebarContainer {
 }
 
 export type MenuItemsType = {
-    [key in MenuItemKey]: string[];
+    [key in MenuItemKey]: any;
 };
 
 type MenuItems = {
@@ -95,10 +95,11 @@ const SubSidebarContainer = ({ selectedItem }: ISubSidebarContainer): JSX.Elemen
             }
 
             // Condition 1: One-piece category can only be selected if none of the tops, pants, or skirts are selected
-            if (newItemCategory === '원피스' && prevItems.some((prevItem) => ['상의', '바지', '스커트'].includes(Object.entries(menuItems).find(([, items]) => items.includes(prevItem))?.[0]))) {
+            if (newItemCategory === '원피스' && prevItems.some((prevItem) => ['상의', '바지', '스커트'].includes((Object.entries(menuItems).find(([, items]) => items.includes(prevItem))?.[0] ?? '')))) {
                 Swal.fire('원피스 카테고리와 상의, 바지, 스커트 카테고리는 동시에 선택 할 수 없습니다.', '', 'warning');
                 return prevItems;
             }
+
 
             // Condition 2: Pants and skirt categories cannot overlap each other
             if (newItemCategory === '바지' && prevItems.some((prevItem) => Object.entries(menuItems).find(([, items]) => items.includes(prevItem))?.[0] === '스커트')) {
