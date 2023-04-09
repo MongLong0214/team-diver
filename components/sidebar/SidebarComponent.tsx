@@ -16,7 +16,7 @@ const SidebarComponent = ({ setSelectedItem }: ISidebarComponent): JSX.Element =
         setActiveItem(item);
     };
 
-    const itemClass = (item: MenuItemKey) => `flex items-center p-2 text-gray-800 rounded-lg text-gray-800 ${activeItem === item ? 'bg-orange-200' : ''} hover:bg-oringe-200 dark:hover:bg-orange-200`;
+    const itemClass = (item: MenuItemKey) => `flex items-center p-2 text-gray-800 rounded-lg text-gray-800 ${activeItem === item ? "bg-orange-200" : ""} hover:bg-orange-200 dark:hover:bg-orange-200`;
 
     return (
         <>

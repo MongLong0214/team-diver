@@ -53,7 +53,7 @@ const ImageSection = ({ imgRef }: props): JSX.Element => {
   const englishPrompts = convertPrompt(promptVal);
 
   const uploadImage = async (): Promise<uploadImageUrl> => {
-    setLoadingOverlay(true)
+    setLoadingOverlay(true);
 
     try {
       if (imgRef.current !== null) {
@@ -85,7 +85,11 @@ const ImageSection = ({ imgRef }: props): JSX.Element => {
     } finally {
       console.log("uploadImage finished");
     }
+
+    // Add a return statement outside the try block
+    return { result: false };
   };
+
 
 
 

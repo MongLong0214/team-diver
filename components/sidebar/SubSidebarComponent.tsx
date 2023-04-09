@@ -23,8 +23,9 @@ export interface ISubSidebarComponent {
     selectedItem: string;
     items: string[];
     onSubItemClick: (item: string) => void;
-    setStyleItems: (item: string) => void;
-    styleItems: string;
+
+    setStyleItems: any;
+    styleItems: any;
     onStyleItemClick: (styleType: string, styleKey: string) => void;
 }
 
@@ -180,7 +181,7 @@ const SubSidebarComponent = ({selectedItem, items, onSubItemClick, setStyleItems
                                 className="w-full h-12 bg-gray-800 rounded flex items-center justify-center">
                                 <div className="flex items-center">
                                     <img src="/assets/jumpsuit.png" alt="jumpsuit" className="w-8 h-8 object-cover" />
-                                    <span className="text-white font-bold ml-2">90's JumpSuit Style</span>
+                                    <span className="text-white font-bold ml-2">Retro JumpSuit Style</span>
                                 </div>
                             </button>
 
