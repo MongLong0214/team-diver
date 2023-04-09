@@ -1,0 +1,12 @@
+.canvas {
+  background-color: white;
+  position: absolute;
+  top:0;
+}
+.visible {
+  opacity:0.5;
+}
+
+.hidden {
+  opacity:0;
+}
