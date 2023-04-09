@@ -9,7 +9,7 @@ const Layout = (): JSX.Element => {
             <section className="min-w-[750px]">
                 <SidebarContainter/>
             </section>
-            <section className="min-w-full flex">
+            <section className="min-w-[550px] flex">
                 <div className='justify-self-center'>
                     <Form/>
                 </div>
