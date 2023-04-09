@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb10f82d-1251-4847-91ef-ac8f9641f92b" name="Changes" comment="사이드바 작업 merge">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/sidebar/SidebarComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/sidebar/SidebarComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/sidebar/SidebarContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/sidebar/SidebarContainer.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="bb10f82d-1251-4847-91ef-ac8f9641f92b" name="Changes" comment=" merge" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -82,7 +77,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680441154300</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="1차 완성본">
+      <created>1681018223865</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1681018223865</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -101,6 +103,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="사이드바 작업 merge" />
-    <option name="LAST_COMMIT_MESSAGE" value="사이드바 작업 merge" />
+    <MESSAGE value="1차 완성본" />
+    <option name="LAST_COMMIT_MESSAGE" value="1차 완성본" />
   </component>
 </project>
