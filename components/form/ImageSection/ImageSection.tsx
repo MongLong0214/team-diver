@@ -140,7 +140,7 @@ const ImageSection = ({ imgRef }: props): JSX.Element => {
       setLoadingOverlay(false);
     } finally {
       console.log("generateImage finished");
-      // setLoadingOverlay(false);
+      setLoadingOverlay(false);
     }
   };
 
@@ -166,11 +166,10 @@ const ImageSection = ({ imgRef }: props): JSX.Element => {
 
     try {
       const file: File = e.target.files[0];
-      // if image size is smaller than 300 * 300, swal alert
-      if (e.target.files[0].size < 300 * 300) {
+      if (e.target.files[0].size < 200 * 200) {
         Swal.fire({
           title: "이미지 사이즈가 너무 작습니다.",
-          text: "300 * 300 이상의 이미지를 업로드해주세요.",
+          text: "200 * 200 이상의 이미지를 업로드해주세요.",
           icon: "warning",
           confirmButtonText: "확인",
         }).then(()=> {
