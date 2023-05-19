@@ -23,3 +23,11 @@ pnpm dev
 2. 마스킹이 끝나면 원하는 의상을 선택합니다.
 3. 마스킹과 의상 선택이 끝나면 '이미지 생성' 버튼을 눌러 변경 된 이미지를 확인합니다.
 
+# 기술 스택
+
+1. Next Js 13.2.4
+2. TypeScript
+3. Tailwind
+4. Recoil
+5. AWS S3
+6. Stable diffusion API
