@@ -31,3 +31,6 @@ pnpm dev
 4. Recoil
 5. AWS S3
 6. Stable diffusion API
+
+# 도메인
+stablediffusion-test.vercel.app/main
