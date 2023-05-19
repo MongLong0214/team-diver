@@ -12,8 +12,7 @@ pnpm dev
 ```
 실행 도메인 : http://stablediffusion-test.vercel.app/main
 
-# Stablediffusion API를 활용한 의상 변경 서비스
-
+# Stablediffusion API를 활용한 가상의류 피팅 서비스
  Stable diffusion에서 제공하는 inpaint(image to image) 기능을 활용하여, 
  전신사진 속 원하는 의상만 변경할 수 있는 서비스 입니다.
 
