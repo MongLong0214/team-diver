@@ -59,7 +59,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       track_id: null
     }
     const fetchResponse = await fetch(
-        "https://stablediffusionapi.com/api/v4/dreambooth/inpaint", {
+        "https://stablediffusionapi.com/api/v3/dreambooth/inpaint", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

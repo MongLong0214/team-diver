@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c084a02-06bc-4dd5-8371-1b5c96079f5c" name="Changes" comment="사이드바 작업 merge">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/form/ImageSection/ImagePreview.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/form/ImageSection/ImagePreview.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/form/ImageSection/ImageSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/form/ImageSection/ImageSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/image/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/image/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +83,7 @@
       <workItem from="1683514908424" duration="12376000" />
       <workItem from="1683603805069" duration="631000" />
       <workItem from="1683691226021" duration="7149000" />
-      <workItem from="1684219623861" duration="13168000" />
+      <workItem from="1684219623861" duration="16710000" />
     </task>
     <task id="LOCAL-00001" summary="사이드바 작업 merge">
       <created>1680441154300</created>

@@ -140,7 +140,10 @@ const ImageSection = ({ imgRef }: props): JSX.Element => {
       setLoadingOverlay(false);
     } finally {
       console.log("generateImage finished");
-      setLoadingOverlay(false);
+      //2초 후에 로딩바 종료
+        setTimeout(() => {
+            setLoadingOverlay(false);
+        } , 2000);
     }
   };
 
