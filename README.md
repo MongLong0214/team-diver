@@ -10,7 +10,7 @@ yarn dev
 # or
 pnpm dev
 ```
-실행 도메인 : http://www.stablediffusion-test.vercel.app/main
+실행 도메인 : http://stablediffusion-test.vercel.app/main
 
 # Stablediffusion API를 활용한 의상 변경 서비스
 
